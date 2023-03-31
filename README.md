@@ -1,4 +1,4 @@
-# LLM MEME
+# LLM ARC
 
 ## Setup conda environment
 
