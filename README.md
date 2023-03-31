@@ -3,8 +3,8 @@
 ## Setup conda environment
 
 ```bash
-conda create --name lmm-meme python
-conda activate lmm-meme
+conda create --name lmm-arc python
+conda activate lmm-arc
 pip install -r requirements.txt
 ```
 
