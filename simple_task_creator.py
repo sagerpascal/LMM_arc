@@ -54,14 +54,56 @@ def create_single_task_477d2879():
     plt.imshow(image)
     plt.show()
 
+def create_single_task_5daaa586():
+    print("asdf")
+    # 12 to 25 grid with and height
+    h, w = np.random.randint(12, 25, 2)
+    grid = np.zeros((h,w))
+
+    # 4 colors
+    cols = np.random.randint(1, 9, 4)
+    # choose sprinkle color
+    sp_col = np.random.choice(cols)
+    # add sprinkles
+    # determine P(flip)
+    p_flip = 1/np.random.randint(3, 10)
+    # flip corresponding cells
+    grid[np.random.uniform(0,1,(h,w)) < p_flip] = sp_col
+
+    offsets = {}
+    # size horizontal seg
+    size_hor = np.random.randint(3, w-4)
+    # left offset
+    offsets["left_off"] = int((w-size_hor)/2)
+    offsets["right_off"] = offsets["left_off"]+size_hor
+    # size vert seg
+    size_ver = np.random.randint(3, h - 4)
+    # top offset
+    offsets["top_off"]
+    top_off = int((h - size_ver) / 2)
+    bot_off = top_off+size_ver
+
+    # randomly select color and line -> draw
 
 
-def create_task_08ed6ac7(n_samples, path=Path('08ed6ac7_v2.json')):
+
+
+
+    input_data = None
+    output_data = None
+    task_dict = {
+        "input": input_data.tolist(),
+        "output": output_data.tolist()
+    }
+    return task_dict
+
+
+def create_task_samples(task_fn, n_samples, path):
     assert not path.exists()
 
     tasks = []
     for _ in range(n_samples):
-        task_dict = create_single_task_08ed6ac7()
+        task_dict = task_fn()
         tasks.append(task_dict)
     data = {"train": tasks}
 
@@ -69,19 +111,35 @@ def create_task_08ed6ac7(n_samples, path=Path('08ed6ac7_v2.json')):
         json.dump(data, fp)
 
 
-def create_task_477d2879(n_samples, path=Path('477d2879_v2.json')):
-    assert not path.exists()
-
-    tasks = []
-    for _ in range(n_samples):
-        task_dict = create_single_task_477d2879()
-        tasks.append(task_dict)
-    data = {"train": tasks}
-
-    with open(path, 'w') as fp:
-        json.dump(data, fp)
+# def create_task_08ed6ac7(n_samples, path=Path('08ed6ac7_v2.json')):
+#     assert not path.exists()
+#
+#     tasks = []
+#     for _ in range(n_samples):
+#         task_dict = create_single_task_08ed6ac7()
+#         tasks.append(task_dict)
+#     data = {"train": tasks}
+#
+#     with open(path, 'w') as fp:
+#         json.dump(data, fp)
+#
+#
+# def create_task_477d2879(n_samples, path=Path('477d2879_v2.json')):
+#     assert not path.exists()
+#
+#     tasks = []
+#     for _ in range(n_samples):
+#         task_dict = create_single_task_477d2879()
+#         tasks.append(task_dict)
+#     data = {"train": tasks}
+#
+#     with open(path, 'w') as fp:
+#         json.dump(data, fp)
 
 
 if __name__ == '__main__':
     # create_task_08ed6ac7(n_samples=args.n_samples)
-    create_task_477d2879(n_samples=args.n_samples)
+    # create_task_477d2879(n_samples=args.n_samples)
+
+    #create_task_samples(create_single_task_477d2879, n_samples=args.n_samples, path=Path('477d2879_v2.json'))
+    create_task_samples(create_single_task_5daaa586, n_samples=args.n_samples, path=Path('5daaa586.json'))
