@@ -61,11 +61,13 @@ def create_single_task_477d2879(image=None):
                     data[i, j] = 0
         return data
 
+
     def remove_small_components(data, min_size=5):
         for v in np.unique(data):
             if v != 0 and np.sum(data == v) < min_size:
                 data[data == v] = 0
         return data
+
 
     def mark_border(data):
         borders = np.zeros(data.shape, dtype=int)
@@ -173,6 +175,7 @@ def create_single_task_477d2879(image=None):
     return task_dict
 
 
+
 def create_task(task_f, n_samples, path):
     if path.exists():
         answer = input(f"File {path} already exists. Overwrite? (y/n)")
@@ -187,10 +190,12 @@ def create_task(task_f, n_samples, path):
         task_dict = task_f()
         if task_dict is not None:
             tasks.append(task_dict)
+
     data = {"train": tasks}
 
     with open(path, 'w') as fp:
         json.dump(data, fp)
+
 
 
 def create_task_08ed6ac7(n_samples, path=Path('08ed6ac7_v2.json')):
@@ -204,3 +209,4 @@ def create_task_477d2879(n_samples, path=Path('477d2879_v2.json')):
 if __name__ == '__main__':
     create_task_08ed6ac7(n_samples=args.n_samples)
     create_task_477d2879(n_samples=args.n_samples)
+
